@@ -1,0 +1,205 @@
+
+
+
+
+->a=(fun(1)+fun2(3,4))/fun3(6) - which function will execute 1st
+
+	its depend on the compiler
+->memchr-strchr -difference
+
+	void *memchr(const void *str, int c, size_t n)
+	char *strchr(const char *str, int c)
+
+	memchr & strchr searches the first occurns of the character pointed by the string 
+		and returns a pointer to the first occurence of a string or NULL if the character is not found
+	-> we can check the occurence of a character
+	-> we can check weather a character is present or not
+	
+	Difference - str stops when null occurs but mem does not. 
+		     thats y we are giving another parameter length to stop. 
+
+-> memcpy  && memmove 
+
+	memcpy(source,destination,n) --- n-> no. of bytes need to copy
+		
+		it will copy one-one byte of data from source to destination in that we can lost the some data
+
+	memmove(source,destination,n) --- n-> no. of bytes need to copy
+
+		in this first it will copy the source data into the intermediate buffer and from it will copy to destination
+		so we cant loose the data in source code
+
+ 
+
+  
+->How to calculate the size of the file
+
+	position : 1	SEEK_SET     	Beginning of file
+
+	   	   2	SEEK_CUR	Current position of the file pointer
+
+	   	   3	SEEK_END	End of file
+
+	fseek(fp,0,seek_end),ftell(fp);
+
+
+-> realloc prototype - what will happen if we assign newsize is 0
+
+		ptr = (int *) realloc (ptr, n*sizeof(int));-> 2 bytes =a,b =a
+			
+		
+-> ((a)+(b-c))/(d&e|f) write preorder
+
+
+		Inorder (Left, Root, Right)  - a+b-c/d&e|f
+ 		Preorder (Root, Left, Right) - /-+abc|&def
+		Postorder (Left, Right, Root)- ab+c-de&f|/		
+
+
+->which sorting is better if the first few elements are in order and other few are in random
+
+		- Quick sort
+
+->reverse a single linked list program    &&  print alternate nodes 
+
+
+		// Iterative C program to reverse a linked list
+		#include <stdio.h>
+		#include <stdlib.h>
+
+		/* Link list node */
+		struct node {
+			int data;
+			struct node* next;
+		};
+		struct node* head = NULL;
+		struct node* last = NULL;
+		/* Function to reverse the linked list */
+		void reverse(struct node** head)
+		{
+			struct node* prevnode = NULL;
+			struct node* currentnode = *head;
+			struct node* nextnode = *head;
+			while (nextnode != NULL) {
+				// Store next
+				nextnode = nextnode->next;
+
+				// Reverse current node's pointer
+				currentnode->next = prevnode;
+
+				// Move pointers one position ahead.
+				prevnode = currentnode;
+				currentnode = nextnode;
+			}
+			*head = prevnode;
+		}
+		// printing alternate nodes
+		void printalternode(struct node** head)
+		{
+    			int count =0;
+    			while((*head) != NULL)
+    			{
+        			if(count % 2 == 0)
+         			printf("%d ",(*head)->data);
+         			count++;
+         			(*head) = (*head)->next;
+    			}
+		}
+
+		/* Function to push a node */
+		void create(struct node** head, int ele)
+		{
+			struct node* new
+				= (struct node*)malloc(sizeof(struct node));
+        		if((*head)==NULL)
+        		{
+            		new->data = ele;
+            		new -> next = NULL;
+            		(*head)=last=new;
+        		}
+           		else{
+               
+          
+                    		new->data=ele;
+	                	new->next=NULL;
+	                	last->next=new;
+	                	last=new;
+           		}
+        
+		}
+
+		/* Function to print linked list */
+		void display(struct node* head)
+		{
+			struct node* temp = head;
+			while (temp != NULL) {
+				printf("%d ", temp->data);
+				temp = temp->next;
+			}
+		}
+
+		/* Driver code*/
+		int main()
+		{
+			/* Start with the empty list */
+	
+
+			create(&head, 20);
+			create(&head, 4);
+			create(&head, 15);
+			create(&head, 85);
+
+			printf("Given linked list\n");
+			display(head);
+			reverse(&head);
+			printf("\nReversed Linked list \n");
+			display(head);
+			printf("\nalternate nodes\n");
+			printalternode(&head);
+			display(head);
+	
+		}
+
+
+
+		
+->In O(1) time how concatenate two linked lists?(which one do you choose dll or sll) 
+
+
+		we dont know the last element in sll so if we use circular-double ll 
+		we can know the last element in cll   
+
+
+->pthreads
+->which linked list is best for the concatenate two nodes  
+
+		single linked list
+
+
+->getch and getche prototype
+
+		getch()
+		it reads a single character from keyboard. 
+		But it does not use any buffer. 
+		So the entered character is immediately returned without waiting for the enter key.
+
+		getche()
+		It reads a single character from the keyboard and displays 
+		immediately on output screen without waiting for enter key.
+
+
+->function pointer prototype
+
+
+		void (*fun_ptr)(int) = &fun;
+		(*fun_ptr)(10);
+		
+
+		void (*fun_ptr_arr[])(int,int)={add,sub,mul};
+		if(ch > 2) return 0;
+		
+		(*fun_ptr_arr[ch])(a,b);
+		
+
+->What is trashing,segmentation,page fault,threads & process differences, demand paging,
+-> what is shared between the threads
